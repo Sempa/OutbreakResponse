@@ -1,0 +1,82 @@
+---
+title: "Plague outbreak in Himachal Pradesh,India"
+author: "Zenabu, Zinhle, and Joseph"
+date: "17/01/2020"
+output:
+  html_document:
+    toc: yes
+  word_document:
+    toc: yes
+  pdf_document:
+    fig_caption: yes
+    toc: yes
+  html_notebook:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+if (Sys.info()["login"] == "sempaj") {
+  knitr::opts_knit$set(root.dir = "~/OutbreakResponse")
+ } else if (Sys.info()["login"] == "zinhlem") {
+  knitr::opts_knit$set(root.dir = "C:/Users/Private/OneDrive - Stellenbosch University/SACEMA Projects/GOARN-WHO/SMARTIES_ASSIGNMENT")
+ }  else if (Sys.info()["login"] == "zenabu") {
+  knitr::opts_knit$set(root.dir = "C:/Users/Private/OneDrive - Stellenbosch University/SACEMA Projects/GOARN-WHO/SMARTIES_ASSIGNMENT")
+}
+knitr::opts_chunk$set(cache=TRUE)
+library(tidyverse)
+library(magrittr)
+library(knitr)
+library(ggplot2)
+library(EpiCurve)
+library(RColorBrewer)
+```
+
+* Read in data
+
+```{r "data", message = FALSE, cache = TRUE}
+plague2_data <- read.csv('Data/plague_2.csv')
+```
+
+
+```{r, message = FALSE, cache = TRUE}
+
+plague2_data <- plague2_data %>%
+mutate(onsetDate_new = as.Date(strptime(onsetDate,'%d/%m/%Y')))
+
+attach( plague2_data)
+
+head(plague2_data)
+
+summary(plague2_data)
+```
+
+
+```{r, cache = F}
+EpiCurve(plague2_data,
+date = "onsetDate_new",
+period = "day",
+color ="#9900ef",
+ylabel="Number of cases",
+title = "Epidemic curve for total number of cases of Plague in  Himachal Pradesh, India per day",
+#note = "Daily epidemic curve",
+xlabel = sprintf("Date of onset of symptoms from %s to %s", min(onsetDate_new), max(onsetDate_new)))
+
+```
+
+The first case of the plague outbreak of India was detected on 11-Oct-19 and reached it's peak on 6-Nov-19. Majority 85% out of 189 plague cases were Lab confirmed.
+
+```{r, cache = F}
+
+EpiCurve(plague2_data,
+date = "onsetDate_new",
+period = "day",
+color =c("#2ca25f","#99d8c9"),
+ylabel="Number of cases",
+title = "Epidemic curve for status of cases of Plague inHimachal Pradesh, India per day",
+#note = "Daily epidemic curve",
+cutvar = 'status',
+xlabel=sprintf("Date of onset of symptoms from %s to %s", min(onsetDate_new), max(onsetDate_new)))
+```
+
+**Data needs:**  
+We need genotypic data on confiemed cases to study transmission patterns in the dataset and GIS data to study the geographical distibution of the cases in Himachal Pradesh, India.
