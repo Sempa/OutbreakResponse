@@ -34,7 +34,7 @@ library(RColorBrewer)
 * Read in data
 
 ```{r "data", message = FALSE, cache = TRUE}
-plague2_data <- read.csv('Data/plague_2.csv')
+plague2_data <- read_csv('Data/plague_2.csv')
 ```
 
 
@@ -57,9 +57,9 @@ date = "onsetDate_new",
 period = "day",
 color ="#9900ef",
 ylabel="Number of cases",
-title = "Epidemic curve for total number of cases of Plague in  Himachal Pradesh, India per day",
+title = "An epidemic curve for the pneumonic plague outbreak in Northeast India\n 12 Oct 2019 - 29 Nov 2019",
 #note = "Daily epidemic curve",
-xlabel = sprintf("Date of onset of symptoms from %s to %s", min(onsetDate_new), max(onsetDate_new)))
+xlabel = sprintf("Date of onset of symptoms from %s to %s", min(plague2_data$onsetDate_new), max(plague2_data$onsetDate_new)))
 
 ```
 
@@ -72,11 +72,11 @@ date = "onsetDate_new",
 period = "day",
 color =c("#2ca25f","#99d8c9"),
 ylabel="Number of cases",
-title = "Epidemic curve for status of cases of Plague inHimachal Pradesh, India per day",
+title = "An epidemic curve for the pneumonic plague outbreak in Northeast India by status\n 12 Oct 2019 - 29 Nov 2019",
 #note = "Daily epidemic curve",
 cutvar = 'status',
-xlabel=sprintf("Date of onset of symptoms from %s to %s", min(onsetDate_new), max(onsetDate_new)))
+xlabel=sprintf("Date of onset of symptoms from %s to %s", min(plague2_data$onsetDate_new), max(plague2_data$onsetDate_new)))
 ```
 
 **Data needs:**  
-We need genotypic data on confiemed cases to study transmission patterns in the dataset and GIS data to study the geographical distibution of the cases in Himachal Pradesh, India.
+We need genotypic data on confirmed cases to study transmission patterns in the dataset and GIS data to study the geographical distribution of the cases in Himachal Pradesh, India.
