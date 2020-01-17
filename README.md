@@ -1,0 +1,2 @@
+# OutbreakResponse
+SACEMA-Smarties exercise
