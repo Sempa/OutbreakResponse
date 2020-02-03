@@ -1,20 +1,20 @@
 ---
-title: "Plague outbreak in Himachal Pradesh,India"
+title: "PNEUMONIC PLAGUE OUTBREAK IN NORTHEAST INDIA"
 author: "Zenabu, Zinhle, and Joseph"
 date: "17/01/2020"
 output:
-  html_document:
+  pdf_document:
+    fig_caption: yes
     toc: yes
   word_document:
     toc: yes
-  pdf_document:
-    fig_caption: yes
+  html_document:
     toc: yes
   html_notebook:
     toc: yes
 ---
 
-```{r setup, include=FALSE}
+```{r setup, echo = FALSE, include = FALSE}
 if (Sys.info()["login"] == "sempaj") {
   knitr::opts_knit$set(root.dir = "~/OutbreakResponse")
  } else if (Sys.info()["login"] == "zinhlem") {
@@ -30,6 +30,28 @@ library(ggplot2)
 library(EpiCurve)
 library(RColorBrewer)
 ```
+
+**Background**
+
+Plague is a zoonotic disease caused by a bacteria found in rodents (1). Individuals who are infected with plague usually manifest symptoms after an incubation period of three to seven days. There are three main forms of the plague disease: bubonic, septicaemic and pneumonic (2). Transmission of the plague infection is through bites of an infected rodent or inhalation of infected human respiratory droplets (1). It was once a dreaded disease in India and claimed nearly 13 000 000 lives between the years 1898 and 1994 (2,3). This disease has occurred in India since the sixteenth century(2). 
+
+
+
+**Case definition**
+
+Plague diagnosis is confirmed by laboratory diagnosis which can either be by the isolation of Y. pestis from a clinical specimen or a significant (fourfold or more) change in paired serum antibody titer to *Y. pestis* F1 antigen (4).
+
+**Symptoms**
+
+Symptoms of pneumonic plague include fever, headache, development of pneumonia within a short space of time, followed by shortness of breath, chest pain and cough. The patient may progress to respiratory failure and shock if not treated within 2 to 4 days. If not treated, pneumonic plague can be fatal (5). 
+
+**Prevention**
+
+Currently, there is no vaccine for plague. People who came into direct contact with infectious people must take antibiotics for seven days to decrease chances of being infected (5).  Patients who suspect they might be infected with plague must wear surgical masks to prevent spreading the diseases. Plague is usually caused by rodents and fleas, as part of prevention, people are encouraged to reduce rodent habitats around them and to keep fleas off their pets (6). 
+
+**Situation update**
+
+We report on the progression of the recent pneumonic plague outbreak in a community in northeast India which commenced on 12 October 2019. The community has a population of 302 people. Between the 12th of October 2019 and 29th of November 2019, there were 189 reported cases, 160 confirmed cases and 29 probable cases. The outbreak has caused 24 deaths to date.
 
 * Read in data
 
@@ -51,7 +73,7 @@ summary(plague2_data)
 ```
 
 
-```{r, cache = F}
+```{r, cache = FALSE}
 EpiCurve(plague2_data,
 date = "onsetDate_new",
 period = "day",
@@ -59,7 +81,7 @@ color ="#9900ef",
 ylabel="Number of cases",
 title = "An epidemic curve for the pneumonic plague outbreak in Northeast India\n 12 Oct 2019 - 29 Nov 2019",
 #note = "Daily epidemic curve",
-xlabel = sprintf("Date of onset of symptoms from %s to %s", min(plague2_data$onsetDate_new), max(plague2_data$onsetDate_new)))
+xlabel = "Date of onset of symptoms")
 
 ```
 
@@ -75,8 +97,22 @@ ylabel="Number of cases",
 title = "An epidemic curve for the pneumonic plague outbreak in Northeast India by status\n 12 Oct 2019 - 29 Nov 2019",
 #note = "Daily epidemic curve",
 cutvar = 'status',
-xlabel=sprintf("Date of onset of symptoms from %s to %s", min(plague2_data$onsetDate_new), max(plague2_data$onsetDate_new)))
+xlabel="Date of onset of symptoms")
 ```
 
-**Data needs:**  
-We need genotypic data on confirmed cases to study transmission patterns in the dataset and GIS data to study the geographical distribution of the cases in Himachal Pradesh, India.
+**Data needs**  
+We need genomic data on confirmed cases to study transmission patterns in the dataset and GIS data to study the geographical distribution of the cases in Himachal Pradesh, India.
+
+**References**
+
+**1** World Health Organization (WHO). Plague https://www.who.int/news-room/fact-sheets/detail/plague [accessed: 17 January 2020]
+
+**2** World Health Organization (WHO). Plague Outbreak in Madagascar. https://apps.who.int/iris/bitstream/handle/10665/259208/Ex-PlagueMadagascar0992017.pdf?sequence=2 [accessed: 17 January 2020]
+
+**3** Epidemiological studies of plague in India. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2555600/pdf/bullwho00328-0149.pdf [accessed: 17 January 2020]
+
+**4** Centers for Disease Control and Prevention. (2020).  Plague (Yersinia pestis). https://wwwn.cdc.gov/nndss/conditions/plague/case-definition/2020/ [accessed: 17 January 2020]
+
+**5** Centers for Disease Control and Prevention. (4 April 2018). Facts about pneumonic plague. https://emergency.cdc.gov/agent/plague/factsheet.asp [ accessed: 17 january 2020]
+
+**6** Centers for Disease Control and Prevention. (27 November 2018). Plague: prevention. https://www.cdc.gov/plague/prevention/index.html [accessed: 17 January 2020]
