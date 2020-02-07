@@ -1,0 +1,11 @@
+Thanks for the report, and a nice job overall. Here are a few things to consider for your updated report:
+•	Do not show the code that generates the figures or other analysis - this is not appropriate for a situation report.
+•	Think about the structure of the situation report. What information is essential, and in what order will readers want to see the information? Don’t include unnecessary background information (eg, while it may be interesting that 13M lives were lost in the last century, no one responding to this outbreak actually needs to know this figure; certainly don’t put it at the top of the report, which should be where the most critical information is presented). I suggest looking at a few situation reports from recent or ongoing outbreaks to get a better idea of what information to present and in what order.
+•	Make sure that each figure you provide is making a specific point about the data, and tell the reader what it is. For example, what is the purpose of including two epicurves? If there isn’t any specific reason to include a figure, don’t include it.
+•	Try to make complete use of the data to inform on the current situation. For example, what is the case fatality in the outbreak? 
+•	Include an assessment of the trajectory of the outbreak. Do you think it’s increasing, decreasing, or remaining steady? What is the basis for this assessment? (Remember that reporting delays can affect the apparent trajectory - is there anything you can say about the reporting delays that informs your assessment?)
+
+I will get back to you soon with updated data on your outbreak. Your new data set will also include information the sex and age distribution of cases. 
+
+Cheers,
+J

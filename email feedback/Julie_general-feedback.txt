@@ -1,0 +1,8 @@
+Hi all, 
+
+You will soon receive updated data for the SMART Challenge Assignment. When preparing your new report, please keep in mind that you’ve been tasked with writing a *situation* report, not an outbreak investigation report. One of the main differences is that a situation report focuses on providing a succinct update - eg, highlighting changes since the last report. It should provide only the necessary context. For an example of recent situation reports on 2019-nCoV, please see here: https://www.who.int/emergencies/diseases/novel-coronavirus-2019/situation-reports, and for example Ebola situations reports from DRC, see here: https://www.who.int/emergencies/diseases/ebola/drc-2019/situation-reports
+
+Naturally, there will be some information contained in the real sitreps that you won’t be able to include, due to working with simulated data, which is fine!
+
+Cheers,
+Juliet
