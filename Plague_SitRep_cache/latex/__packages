@@ -15,3 +15,7 @@ scales
 timeDate
 EpiCurve
 RColorBrewer
+kableExtra
+stargazer
+plotly
+tinytex

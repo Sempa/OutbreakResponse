@@ -5,18 +5,18 @@ date: "17/01/2020"
 output:
   pdf_document:
     fig_caption: yes
-    toc: yes
+    toc: true
   word_document:
-    toc: yes
+    toc: true
   html_document:
-    toc: yes
+    toc: true
   html_notebook:
-    toc: yes
+    toc: true
 ---
 
 ```{r setup, echo = FALSE, include = FALSE}
 if (Sys.info()["login"] == "sempaj") {
-  knitr::opts_knit$set(root.dir = "~/OutbreakResponse")
+  knitr::opts_knit$set(root.dir = "~/GitHub/OutbreakResponse")
  } else if (Sys.info()["login"] == "zinhlem") {
   knitr::opts_knit$set(root.dir = "C:/Users/Private/OneDrive - Stellenbosch University/SACEMA Projects/GOARN-WHO/SMARTIES_ASSIGNMENT")
  }  else if (Sys.info()["login"] == "zenabu") {
@@ -29,81 +29,84 @@ library(knitr)
 library(ggplot2)
 library(EpiCurve)
 library(RColorBrewer)
+library(kableExtra)
+library(stargazer)
+library(plotly)
+library(tinytex)
 ```
 
-**Background**
+\newpage
+
+![Alt text](~/GitHub/OutbreakResponse/resources/arrow_image_croped.jpg)
+
+# Background
 
 Plague is a zoonotic disease caused by a bacteria found in rodents (1). Individuals who are infected with plague usually manifest symptoms after an incubation period of three to seven days. There are three main forms of the plague disease: bubonic, septicaemic and pneumonic (2). Transmission of the plague infection is through bites of an infected rodent or inhalation of infected human respiratory droplets (1). It was once a dreaded disease in India and claimed nearly 13 000 000 lives between the years 1898 and 1994 (2,3). This disease has occurred in India since the sixteenth century(2). 
 
 
-
-**Case definition**
+# Case definition
 
 Plague diagnosis is confirmed by laboratory diagnosis which can either be by the isolation of Y. pestis from a clinical specimen or a significant (fourfold or more) change in paired serum antibody titer to *Y. pestis* F1 antigen (4).
 
-**Symptoms**
+# Symptoms
 
 Symptoms of pneumonic plague include fever, headache, development of pneumonia within a short space of time, followed by shortness of breath, chest pain and cough. The patient may progress to respiratory failure and shock if not treated within 2 to 4 days. If not treated, pneumonic plague can be fatal (5). 
 
-**Prevention**
+# Prevention
 
 Currently, there is no vaccine for plague. People who came into direct contact with infectious people must take antibiotics for seven days to decrease chances of being infected (5).  Patients who suspect they might be infected with plague must wear surgical masks to prevent spreading the diseases. Plague is usually caused by rodents and fleas, as part of prevention, people are encouraged to reduce rodent habitats around them and to keep fleas off their pets (6). 
 
-**Situation update**
+# Situation update
 
 We report on the progression of the recent pneumonic plague outbreak in a community in northeast India which commenced on 12 October 2019. The community has a population of 302 people. Between the 12th of October 2019 and 29th of November 2019, there were 189 reported cases, 160 confirmed cases and 29 probable cases. The outbreak has caused 24 deaths to date.
 
-* Read in data
+```{r, message = FALSE, cache = TRUE, echo = FALSE, results='hide'}
+# plague2_data <- read_csv('Data/plague_2.csv') 
+plague2_data_update <- read_csv('Data/plague_2_update.csv') 
+# plague2_data <- plague2_data %>%
+# mutate(onsetDate_new = as.Date(strptime(onsetDate,'%d/%m/%Y')))
 
-```{r "data", message = FALSE, cache = TRUE}
-plague2_data <- read_csv('Data/plague_2.csv')
-```
+# attach( plague2_data)
 
+# head(plague2_data)
 
-```{r, message = FALSE, cache = TRUE}
-
-plague2_data <- plague2_data %>%
-mutate(onsetDate_new = as.Date(strptime(onsetDate,'%d/%m/%Y')))
-
-attach( plague2_data)
-
-head(plague2_data)
-
-summary(plague2_data)
-```
-
-
-```{r, cache = FALSE}
-EpiCurve(plague2_data,
-date = "onsetDate_new",
-period = "day",
-color ="#9900ef",
-ylabel="Number of cases",
-title = "An epidemic curve for the pneumonic plague outbreak in Northeast India\n 12 Oct 2019 - 29 Nov 2019",
-#note = "Daily epidemic curve",
-xlabel = "Date of onset of symptoms")
-
+# summary(plague2_data)
 ```
 
 The first case of the plague outbreak of India was detected on 11-Oct-19 and reached it's peak on 6-Nov-19. Majority 85% out of 189 plague cases were Lab confirmed.
 
-```{r, cache = F}
+```{r, cache = FALSE, echo = FALSE, fig.height=3, fig.align = 'left', results='asis'}
+EpiCurve(plague2_data_update,
+date = "onsetDate",
+period = "day",
+color = c("#2ca25f","#99d8c9"),
+ylabel="Number of cases",
+title = "Gender distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct 2019 - 29 Nov 2019",
+cutvar = "sex",
+xlabel = "Date of onset of symptoms")
+plague2_data_update$age_cat <-ifelse(!is.na(plague2_data_update$age),cut(plague2_data_update$age, c(0,seq(20, 60,5))), NA)
 
-EpiCurve(plague2_data,
-date = "onsetDate_new",
+```
+Of the `r length(plague2_data_update$caseID)` cases, majority `r round(table(plague2_data_update$sex)[[1]]/length(plague2_data_update$caseID)*100, 2)`% were female. The first 3 cases of the plague occured in females (Figure above) and it was five days later on the 17-October 2019 when the first case was recored in the males.
+
+```{r, cache = F, echo=FALSE, fig.height=3, fig.align = 'left'}
+
+EpiCurve(plague2_data_update,
+date = "onsetDate",
 period = "day",
 color =c("#2ca25f","#99d8c9"),
 ylabel="Number of cases",
-title = "An epidemic curve for the pneumonic plague outbreak in Northeast India by status\n 12 Oct 2019 - 29 Nov 2019",
+title = "An epidemic curve for the pneumonic plague outbreak in \n Northeast India by status 12 Oct 2019 - 29 Nov 2019",
 #note = "Daily epidemic curve",
 cutvar = 'status',
 xlabel="Date of onset of symptoms")
+
 ```
 
-**Data needs**  
+# Data needs  
 We need genomic data on confirmed cases to study transmission patterns in the dataset and GIS data to study the geographical distribution of the cases in Himachal Pradesh, India.
 
-**References**
+# References
 
 **1** World Health Organization (WHO). Plague https://www.who.int/news-room/fact-sheets/detail/plague [accessed: 17 January 2020]
 
