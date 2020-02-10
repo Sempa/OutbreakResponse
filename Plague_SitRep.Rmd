@@ -96,7 +96,7 @@ xlabel="Date of onset of symptoms")
 
 Of the `r length(plague2_data_update$caseID)` cases, majority `r round(table(plague2_data_update$sex)[[1]]/length(plague2_data_update$caseID)*100, 2)`% were female. The first 3 cases of the plague occured in females (Figure below) and it was five days later, on the 17-October 2019, when the first case was recored in the males.
 
-```{r, cache = F, echo=FALSE, fig.height=3, fig.align = 'left'}
+```{r, cache = F, echo=FALSE, fig.height=3, fig.align = 'left', results='asis'}
 EpiCurve(plague2_data_update,
 date = "onsetDate",
 period = "day",
@@ -112,10 +112,19 @@ plague2_data_update <- plague2_data_update%>%
 EpiCurve(plague2_data_update,
 date = "onsetDate",
 period = "day",
-color = c("#2ca25f","#99d8c9"),
+color = c("#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C", "#FB9A99", "#E31A1C", "#FDBF6F", "#FF7F00", "#CAB2D6", "#6A3D9A"),
 ylabel="Number of cases",
 title = "Age distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct 2019 - 29 Nov 2019",
 cutvar = "age_cat",
+xlabel = "Date of onset of symptoms")
+
+EpiCurve(plague2_data_update,
+date = "deathDate",
+period = "day",
+color = c("#2ca25f","#99d8c9"),
+ylabel="Number of cases",
+title = "Gender distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct 2019 - 29 Nov 2019",
+cutvar = "death",
 xlabel = "Date of onset of symptoms")
 
 

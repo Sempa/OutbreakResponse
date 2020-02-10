@@ -3,4 +3,4 @@
 \contentsline {section}{Symptoms}{2}{section*.4}%
 \contentsline {section}{Prevention}{2}{section*.5}%
 \contentsline {section}{Situation update}{2}{section*.6}%
-\contentsline {section}{References}{3}{section*.7}%
+\contentsline {section}{References}{4}{section*.7}%
