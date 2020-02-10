@@ -1,0 +1,7 @@
+\contentsline {section}{Background}{2}{section*.2}%
+\contentsline {section}{Case definition}{2}{section*.3}%
+\contentsline {section}{Symptoms}{2}{section*.4}%
+\contentsline {section}{Prevention}{2}{section*.5}%
+\contentsline {section}{Situation update}{2}{section*.6}%
+\contentsline {section}{Data needs}{3}{section*.7}%
+\contentsline {section}{References}{3}{section*.8}%

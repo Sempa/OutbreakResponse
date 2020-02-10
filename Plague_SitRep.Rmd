@@ -16,6 +16,8 @@ output:
 
 ```{r setup, echo = FALSE, include = FALSE}
 if (Sys.info()["login"] == "sempaj") {
+  knitr::opts_knit$set(root.dir = "~/OutbreakResponse")
+ } else if (Sys.info()["login"] == "joseph") {
   knitr::opts_knit$set(root.dir = "~/GitHub/OutbreakResponse")
  } else if (Sys.info()["login"] == "zinhlem") {
   knitr::opts_knit$set(root.dir = "C:/Users/Private/OneDrive - Stellenbosch University/SACEMA Projects/GOARN-WHO/SMARTIES_ASSIGNMENT")
@@ -37,7 +39,7 @@ library(tinytex)
 
 \newpage
 
-![Alt text](~/GitHub/OutbreakResponse/resources/arrow_image_croped.jpg)
+![](arrow_image_croped.jpg)
 
 # Background
 
@@ -87,7 +89,9 @@ xlabel = "Date of onset of symptoms")
 plague2_data_update$age_cat <-ifelse(!is.na(plague2_data_update$age),cut(plague2_data_update$age, c(0,seq(20, 60,5))), NA)
 
 ```
-Of the `r length(plague2_data_update$caseID)` cases, majority `r round(table(plague2_data_update$sex)[[1]]/length(plague2_data_update$caseID)*100, 2)`% were female. The first 3 cases of the plague occured in females (Figure above) and it was five days later on the 17-October 2019 when the first case was recored in the males.
+
+
+Of the `r length(plague2_data_update$caseID)` cases, majority `r round(table(plague2_data_update$sex)[[1]]/length(plague2_data_update$caseID)*100, 2)`% were female. The first 3 cases of the plague occured in females (Figure above) and it was five days later, on the 17-October 2019, when the first case was recored in the males.
 
 ```{r, cache = F, echo=FALSE, fig.height=3, fig.align = 'left'}
 
