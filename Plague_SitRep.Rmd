@@ -107,8 +107,8 @@ xlabel="Date of onset of symptoms")
 
 ```
 
-# Data needs  
-We need genomic data on confirmed cases to study transmission patterns in the dataset and GIS data to study the geographical distribution of the cases in Himachal Pradesh, India.
+[//]: # Data needs  
+[//]: # We need genomic data on confirmed cases to study transmission patterns in the dataset and GIS [//]: # data to study the geographical distribution of the cases in Himachal Pradesh, India.
 
 # References
 
