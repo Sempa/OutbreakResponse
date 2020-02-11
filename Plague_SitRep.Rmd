@@ -25,16 +25,19 @@ if (Sys.info()["login"] == "sempaj") {
   knitr::opts_knit$set(root.dir = "C:/Users/Private/OneDrive - Stellenbosch University/SACEMA Projects/GOARN-WHO/SMARTIES_ASSIGNMENT")
 }
 knitr::opts_chunk$set(cache=TRUE)
+knitr::opts_chunk$set(fig.pos = 'H')
+knitr::opts_chunk$set(results = 'asis')
+knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(magrittr)
 library(knitr)
 library(ggplot2)
-library(EpiCurve)
 library(RColorBrewer)
 library(kableExtra)
 library(stargazer)
 library(plotly)
 library(tinytex)
+library(incidence)
 ```
 
 \newpage
@@ -43,7 +46,9 @@ library(tinytex)
 
 # Background
 
-Plague is a zoonotic disease caused by a bacteria found in rodents (1). Individuals who are infected with plague usually manifest symptoms after an incubation period of three to seven days. There are three main forms of the plague disease: bubonic, septicaemic and pneumonic (2). Transmission of the plague infection is through bites of an infected rodent or inhalation of infected human respiratory droplets (1). It was once a dreaded disease in India and claimed nearly 13 000 000 lives between the years 1898 and 1994 (2,3). This disease has occurred in India since the sixteenth century(2). 
+The Pneumonic plague outbreak in Himachal Pradesh, India is still ongoing. Since our previous report on 17 January 2020, there has been a single confirmed case within a period of ten days, which resulted in the death of the individual. Between the commencement of the outbreak, 12 October 2019 and 9 December 2019, a total of 190 cases have been reported (161 confirmed and 29 probable cases) including 37 deaths with a case fatality ratio of 19.5%. Of these 190 reported cases, 107 cases were females (56.3%) and 83 (43.7) were males. Of the 37 deaths, 18 (48.6%) were females and 19 (51.4%) were males.
+
+Plague is a zoonotic disease caused by a bacteria found in rodents (1). Individuals who are infected with plague usually manifest symptoms after an incubation period of three to seven days. There are three main forms of the plague disease: bubonic, septicaemic and pneumonic (2).
 
 
 # Case definition
@@ -56,7 +61,7 @@ Symptoms of pneumonic plague include fever, headache, development of pneumonia w
 
 # Prevention
 
-Currently, there is no vaccine for plague. People who came into direct contact with infectious people must take antibiotics for seven days to decrease chances of being infected (5).  Patients who suspect they might be infected with plague must wear surgical masks to prevent spreading the diseases. Plague is usually caused by rodents and fleas, as part of prevention, people are encouraged to reduce rodent habitats around them and to keep fleas off their pets (6). 
+Currently, there is no vaccine for plague. People who came into direct contact with infectious people must take antibiotics for seven days to decrease the chances of being infected (5). Patients who suspect they might be infected with plague must wear surgical masks to prevent spreading the diseases. Plague is usually caused by rodents and fleas, as part of prevention, people are encouraged to reduce rodent habitats around them and to keep fleas off their pets (6). 
 
 # Situation update
 
@@ -80,57 +85,75 @@ plague2_data_update <- plague2_data_update%>%
 The first case of the plague outbreak of India was detected on 11-Oct-19 and reached it's peak on 6-Nov-19 (figure 1). Majority `r round(table(plague2_data_update$status)[[1]]/length(plague2_data_update$caseID)*100, 2)`% out of `r length(plague2_data_update$caseID)` cases were Lab confirmed.
 
 
-```{r, cache = FALSE, echo = FALSE, fig.height = 3, fig.align = 'left', results='asis', fig.cap='Figure 1'}
-EpiCurve(plague2_data_update,
-date = "onsetDate",
-period = "day",
-color =c("#2ca25f","#99d8c9"),
-ylabel="Number of cases",
-title = "An epidemic curve for the pneumonic plague outbreak in \n Northeast India by status 12 Oct 2019 - 29 Nov 2019",
-#note = "Daily epidemic curve",
-cutvar = 'status',
-xlabel="Date of onset of symptoms")
+```{r fig1, cache = FALSE, echo = FALSE, fig.height = 4, fig.align = 'left', results='asis', fig.cap = 'Distribution of cases the pneumonic plague outbreak in\n Northeast India 12 Oct 2019 - 09 Dec 2019'}
+##distribtuion by status
+inc_object <- incidence(plague2_data_update$onsetDate, groups = plague2_data_update$status)
+
+my_theme <- theme_bw(base_size = 12) +
+ theme(panel.grid.minor = element_blank()) +
+ theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, color = "black"))
+plot(inc_object, border = "white") +
+ my_theme +  scale_fill_discrete(name = 'Status')+
+ theme(legend.position = c(0.8, 0.75))
+
 
 ```
 
 
 Of the `r length(plague2_data_update$caseID)` cases, majority `r round(table(plague2_data_update$sex)[[1]]/length(plague2_data_update$caseID)*100, 2)`% were female. The first 3 cases of the plague occured in females (Figure below) and it was five days later, on the 17-October 2019, when the first case was recored in the males.
 
-```{r, cache = F, echo=FALSE, fig.height=3, fig.align = 'left', results='asis'}
-EpiCurve(plague2_data_update,
-date = "onsetDate",
-period = "day",
-color = c("#2ca25f","#99d8c9"),
-ylabel="Number of cases",
-title = "Gender distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct 2019 - 29 Nov 2019",
-cutvar = "sex",
-xlabel = "Date of onset of symptoms")
-# plague2_data_update$age_cat <-ifelse(!is.na(plague2_data_update$age),cut(plague2_data_update$age, c(0,seq(20, 60,5))), NA)
+```{r fig2, cache = F, echo=FALSE, fig.height = 4, fig.align = 'left', results='asis', warning=FALSE, fig.cap = 'Gender distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct - 09 Dec 2019'}
+##gender distribution
+inc_object <- incidence(plague2_data_update$onsetDate, groups = plague2_data_update$sex)
+my_theme <- theme_bw(base_size = 12) +
+ theme(panel.grid.minor = element_blank()) +
+ theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, color = "black"))
+plot(inc_object, border = "white") +
+ my_theme +  scale_fill_discrete(name = 'Gender')+
+ theme(legend.position = c(0.8, 0.75))
+```
 
+
+```{r fig3, cache = F, echo=FALSE, fig.height = 4, fig.align = 'left', results='asis', warning = FALSE, fig.cap = 'Age distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct - 09 Dec 2019'}
+##drawing age distribution
 plague2_data_update <- plague2_data_update%>%
-  mutate(age_cat = cut(age, breaks=c(0,seq(20,65,5))), death = ifelse(!is.na(deathDate), 1, 0) )
-EpiCurve(plague2_data_update,
-date = "onsetDate",
-period = "day",
-color = c("#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C", "#FB9A99", "#E31A1C", "#FDBF6F", "#FF7F00", "#CAB2D6", "#6A3D9A"),
-ylabel="Number of cases",
-title = "Age distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct 2019 - 29 Nov 2019",
-cutvar = "age_cat",
-xlabel = "Date of onset of symptoms")
-
-EpiCurve(plague2_data_update,
-date = "deathDate",
-period = "day",
-color = c("#2ca25f","#99d8c9"),
-ylabel="Number of cases",
-title = "Gender distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct 2019 - 29 Nov 2019",
-cutvar = "death",
-xlabel = "Date of onset of symptoms")
-
+  mutate(age_cat = cut(age, breaks=c(0,seq(20,65,5))), death = ifelse(!is.na(deathDate), 1, 0) )%>%
+  mutate(death_stri = ifelse(death==0, 'alive', 'dead'))
+age_freq <- table(plague2_data_update$age_cat)
+par(mar=c(6, 4, 4, 2))
+barplot(age_freq, 
+        # ylab='Age category (years)',
+        xlab='Frequency', main="Age distribution by category",
+        axes=FALSE,#xlim = c(0,43),
+        col=c("#A6CEE3", "#1F78B4", "#B2DF8A", "#33A02C", "#FB9A99", "#E31A1C", "#FDBF6F", "#FF7F00",
+              "#CAB2D6", "#6A3D9A"),
+        cex.names = .8, cex.axis = .8, cex.main = 1, #legend = rownames(age_freq), args.legend = list(x = "topleft"),
+        las = 2, horiz = T)
+axis(1, at = seq(0,45,5))
 
 ```
 
 
+There were no gender differences in mortality, i.e. `r table(plague2_data_update$sex,plague2_data_update$death_stri)[3]` in females vs `r table(plague2_data_update$sex,plague2_data_update$death_stri)[4]` in males (p.value=`r (prop.test(x=c(18,19),n=c(89,64), alternative = "two.sided", correct = TRUE))$p.value`). The highest number of deaths, i.e. 4 deaths, in a single day, reported occured on `r (plague2_data_update$deathDate[which(!is.na(plague2_data_update$deathDate),)])[which.max(tabulate(match(plague2_data_update$deathDate, plague2_data_update$deathDate[which(!is.na(plague2_data_update$deathDate),)])))]` (figure 4).
+```{r fig4, cache = F, echo=FALSE, fig.height = 4, fig.align = 'left', results='asis', warning=FALSE, fig.cap = 'Gender distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct - 09 Dec 2019'}
+##mortality
+# mort_sex <- table(plague2_data_update$sex,plague2_data_update$death_stri)
+# kable(mort_sex)%>%
+#   kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+##testing for difference in mortlity between females and males
+diff_sex <- prop.test(x=c(18,19),n=c(89,64), alternative = "two.sided", correct = TRUE)
+
+inc_object <- incidence(plague2_data_update$deathDate, groups = plague2_data_update$death_stri)
+my_theme <- theme_bw(base_size = 12) +
+ theme(panel.grid.minor = element_blank()) +
+ theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, color = "black"))
+plot(inc_object, border = "white") +
+ my_theme + ylab('Daily number of deaths')+
+ theme(legend.position = 'none')
+```
+
+
+\newpage
 # References
 
 **1** World Health Organization (WHO). Plague https://www.who.int/news-room/fact-sheets/detail/plague [accessed: 17 January 2020]
