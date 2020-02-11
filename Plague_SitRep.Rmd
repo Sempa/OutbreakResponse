@@ -28,14 +28,13 @@ knitr::opts_chunk$set(cache=TRUE)
 knitr::opts_chunk$set(fig.pos = 'H')
 knitr::opts_chunk$set(results = 'asis')
 knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
 library(tidyverse)
 library(magrittr)
 library(knitr)
 library(ggplot2)
 library(RColorBrewer)
 library(kableExtra)
-library(stargazer)
-library(plotly)
 library(tinytex)
 library(incidence)
 ```
@@ -85,7 +84,7 @@ plague2_data_update <- plague2_data_update%>%
 The first case of the plague outbreak of India was detected on 11-Oct-19 and reached it's peak on 6-Nov-19 (figure 1). Majority `r round(table(plague2_data_update$status)[[1]]/length(plague2_data_update$caseID)*100, 2)`% out of `r length(plague2_data_update$caseID)` cases were Lab confirmed.
 
 
-```{r fig1, cache = FALSE, echo = FALSE, fig.height = 4, fig.align = 'left', results='asis', fig.cap = 'Distribution of cases the pneumonic plague outbreak in\n Northeast India 12 Oct 2019 - 09 Dec 2019'}
+```{r fig1, cache = FALSE, echo = FALSE, fig.height = 4, warning=FALSE, message=FALSE, fig.align = 'left', results='asis', fig.cap = 'Distribution of cases the pneumonic plague outbreak in\n Northeast India 12 Oct 2019 - 09 Dec 2019'}
 ##distribtuion by status
 inc_object <- incidence(plague2_data_update$onsetDate, groups = plague2_data_update$status)
 
@@ -102,7 +101,7 @@ plot(inc_object, border = "white") +
 
 Of the `r length(plague2_data_update$caseID)` cases, majority `r round(table(plague2_data_update$sex)[[1]]/length(plague2_data_update$caseID)*100, 2)`% were female. The first 3 cases of the plague occured in females (Figure below) and it was five days later, on the 17-October 2019, when the first case was recored in the males.
 
-```{r fig2, cache = F, echo=FALSE, fig.height = 4, fig.align = 'left', results='asis', warning=FALSE, fig.cap = 'Gender distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct - 09 Dec 2019'}
+```{r fig2, cache = F, echo=FALSE, fig.height = 4, fig.align = 'left', results='asis', message=FALSE, warning=FALSE, fig.cap = 'Gender distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct - 09 Dec 2019'}
 ##gender distribution
 inc_object <- incidence(plague2_data_update$onsetDate, groups = plague2_data_update$sex)
 my_theme <- theme_bw(base_size = 12) +
