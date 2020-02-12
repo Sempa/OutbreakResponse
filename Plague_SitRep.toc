@@ -1,6 +1,6 @@
-\contentsline {section}{Background}{2}{section*.2}%
+\contentsline {section}{Current risk assessment}{2}{section*.2}%
 \contentsline {section}{Case definition}{2}{section*.3}%
 \contentsline {section}{Symptoms}{2}{section*.4}%
 \contentsline {section}{Prevention}{2}{section*.5}%
-\contentsline {section}{Situation update}{2}{section*.6}%
-\contentsline {section}{References}{7}{section*.7}%
+\contentsline {section}{Situation update}{3}{section*.6}%
+\contentsline {section}{References}{6}{section*.7}%
