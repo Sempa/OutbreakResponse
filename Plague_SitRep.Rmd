@@ -4,6 +4,7 @@ author: "Zenabu, Zinhle, and Joseph"
 date: "17/01/2020"
 output:
   html_document:
+    fig_caption: yes
     toc: true
   word_document:
     toc: true
@@ -51,17 +52,17 @@ Plague is a zoonotic disease caused by a bacteria found in rodents (1). Individu
 The current outbreak began on the 12th of October 2019, with two confirmed cases being reported. One of the first two patients passed away on the 25th of October 2019, whilst the other one survived to date. Of the confirmed cases about 56% were females (Figure 1). Mortality records showed no significant difference between females and males (18 females vs 19 males). The current data suggest that females are slightly more likely to get plague than males, yet both males and females have an equal chance of dying from the plague. Looking at the age distribution (Figure 3), it is evident that people from all age groups are susceptible to plague. However, people from the age groups: 35-40, 45-50 and 50-55 were the least infected. The best way to stop transmission is to treat people who have been exposed to infected people to prevent infection and to isolate people who are confirmed to be infected for the duration of the infection. 
 
 
-__*A strategic approach to the prevention, detection and control of plague*__
+# A strategic approach to prevention, detection and control
 
-# Case definition
+**Case definition**
 
 Plague diagnosis is confirmed by laboratory diagnosis which can either be by the isolation of Y. pestis from a clinical specimen or a significant (fourfold or more) change in paired serum antibody titer to *Y. pestis* F1 antigen (4).
 
-# Symptoms
+**Symptoms**
 
 Symptoms of pneumonic plague include fever, headache, development of pneumonia within a short space of time, followed by shortness of breath, chest pain and cough. The patient may progress to respiratory failure and shock if not treated within 2 to 4 days. If not treated, pneumonic plague can be fatal (5). 
 
-# Prevention
+**Prevention**
 
 Currently, there is no vaccine for plague. People who came into direct contact with infectious people must take antibiotics for seven days to decrease the chances of being infected (5). Patients who suspect they might be infected with plague must wear surgical masks to prevent spreading the diseases. Plague is usually caused by rodents and fleas, as part of prevention, people are encouraged to reduce rodent habitats around them and to keep fleas off their pets (6). 
 
