@@ -2,7 +2,7 @@
 title: "PNEUMONIC PLAGUE OUTBREAK IN NORTHEAST INDIA"
 subtitle: 'SITUATIONAL REPORT 2'
 author: "Zenabu, Zinhle, and Joseph"
-date: "17/01/2020"
+date: "13/02/2020"
 output:
   html_document:
     fig_caption: yes
@@ -50,7 +50,7 @@ The Pneumonic plague outbreak in Himachal Pradesh, India is still ongoing. The c
 The outbreak occurred in 53 households and since the previous report, one case reportedly occurred in a household that previously had 6 cases.
 
 # Current risk assessment
-The outbreak is currently slowing down since the updated date shows only one case occurred after 10 days, compared to the previous rate of infection (Figure 1). The current outbreak began with two confirmed cases, One of the first two patients passed away 13 days later, whilst the other one survived to date. The current data suggest that females are slightly more likely to get plague than males, yet both males and females have an equal chance of dying from the plague. Looking at the age distribution (Figure 2), it is evident that people from all age groups are susceptible to plague. However, people from the age groups: 35-40, 45-50 and 50-55 were the least infected. The best way to stop transmission is to treat people who have been exposed to infected people to prevent infection and to isolate people who are confirmed to be infected for the duration of the infection. There was an average reporting delay of 7.4 days.
+The outbreak is currently slowing down since the updated date shows only one case occurred after 10 days, compared to the previous rate of infection (Figure 1). The current outbreak began with two confirmed cases, One of the first two patients passed away 13 days later, whilst the other one survived to date. The current data suggest that females are slightly more likely to get plague than males, yet both males and females have an equal chance of dying from the plague. Looking at the age distribution (Figure 2), it is evident that people from all age groups are susceptible to plague. However, people from the age groups: 35-40, 45-50 and 50-55 were the least infected. The best way to stop transmission is to treat people who have been exposed to infected people to prevent infection and to isolate people who are confirmed to be infected for the duration of the infection. There was an average case reporting delay of 7.4 days, and this may cause delayed response in disease control.
 
 
 ```{r, message = FALSE, cache = TRUE, echo = FALSE, results='asis'}
@@ -86,18 +86,8 @@ plague2_data_update <- plague2_data_update%>%
 
 ```
 
-There were no gender differences in mortality, i.e. `r table(plague2_data_update$sex,plague2_data_update$death_stri)[3]` in females vs `r table(plague2_data_update$sex,plague2_data_update$death_stri)[4]` in males (p.value=`r (prop.test(x=c(18,19),n=c(89,64), alternative = "two.sided", correct = TRUE))$p.value`). The highest number of deaths, i.e. 4 deaths, in a single day, reported occured on `r (plague2_data_update$deathDate[which(!is.na(plague2_data_update$deathDate),)])[which.max(tabulate(match(plague2_data_update$deathDate, plague2_data_update$deathDate[which(!is.na(plague2_data_update$deathDate),)])))]` (figure 2).
-```{r fig5, cache = F, echo=FALSE, fig.height = 4, fig.align = 'left', results='asis', warning=FALSE, fig.cap = '**Figure 2: Mortality due to pneumonic plague outbreak in Northeast India 12 Oct - 09 Dec 2019**'}
+There were no gender differences in mortality, i.e. `r table(plague2_data_update$sex,plague2_data_update$death_stri)[3]` in females vs `r table(plague2_data_update$sex,plague2_data_update$death_stri)[4]` in males (p.value=`r (prop.test(x=c(18,19),n=c(89,64), alternative = "two.sided", correct = TRUE))$p.value`). The highest number of deaths, i.e. 4 deaths, in a single day, reported occured on `r (plague2_data_update$deathDate[which(!is.na(plague2_data_update$deathDate),)])[which.max(tabulate(match(plague2_data_update$deathDate, plague2_data_update$deathDate[which(!is.na(plague2_data_update$deathDate),)])))]`.
 
-# inc_object <- incidence(plague2_data_update$deathDate, groups = plague2_data_update$death_stri)
-# my_theme <- theme_bw(base_size = 12) +
-#  theme(panel.grid.minor = element_blank()) +
-#  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, color = "black"))
-# plot(inc_object, border = "white") +
-#  my_theme + ylab('Daily number of deaths')+
-#  theme(legend.position = 'none')#+ scale_x_date(limits = c(min(plague2_data_update$onsetDate), max(plague2_data_update$onsetDate)))
-
-```
 
 Fourty-three cases occured in 20-25 year olds, which was the age-group with the highest number of infections, followed by (40-45] and (25-30] year-olds (figure 2). Cases in the (20-25] age range had the highest mortality at 34%. Those who were (0-20] year olds--consisting of only 4 and 6 year olds-- had a higher mortality rate 26.7% compared to (30-35] year olds 20%. there were fewer deaths, only one person, in the (55-60] out ot 9 reported cases and no deaths reported deaths among (50-55] and (35-40] age groups.
 
