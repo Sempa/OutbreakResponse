@@ -1,5 +1,6 @@
 ---
 title: "PNEUMONIC PLAGUE OUTBREAK IN NORTHEAST INDIA"
+subtitle: 'SITUATIONAL REPORT 2'
 author: "Zenabu, Zinhle, and Joseph"
 date: "17/01/2020"
 output:
@@ -44,31 +45,13 @@ library(incidence)
 
 ![](arrow_image_croped.jpg)
 
-The Pneumonic plague outbreak in Himachal Pradesh, India is still ongoing. Since our previous report on 17 January 2020, there has been a single confirmed case within a period of ten days, which resulted in the death of the individual. Between the commencement of the outbreak, 12 October 2019 and 9 December 2019, a total of 190 cases have been reported (161 confirmed and 29 probable cases) including 37 deaths with a case fatality ratio of 19.5%. Of these 190 reported cases, 107 cases were females (56.3%) and 83 (43.7) were males. Of the 37 deaths, 18 (48.6%) were females and 19 (51.4%) were males.
+The Pneumonic plague outbreak in Himachal Pradesh, India is still ongoing. The community has a population of 302 people. Between the 12th of October 2019 and 29th of November 2019, there were 189 reported cases of the plague, which reached it's peak on 6-Nov-19 (figure 1). Since our previous report on 17 January 2020, there has been a single confirmed case within a period of ten days (Figure 1), which resulted in the death of the individual. Between the commencement of the outbreak and 9 December 2019, a total of 190 cases have been reported (161 confirmed and 29 probable cases) including 37 deaths with a case fatality ratio of 20%.Mortality records showed no significant difference between females and males (18 females vs 19 males). Of these 190 reported cases, 107 cases were females (56%) and 83 (44%) were males. Of the confirmed cases 60% were females. The first 3 cases of the plague occured in females (Figure 1) and five days later, the first case was recorded in males.
 
-Plague is a zoonotic disease caused by a bacteria found in rodents (1). Individuals who are infected with plague usually manifest symptoms after an incubation period of three to seven days. There are three main forms of the plague disease: bubonic, septicaemic and pneumonic (2).
+The outbreak occurred in 53 households and since the previous report, one case reportedly occurred in a household that previously had 6 cases.
 
 # Current risk assessment
-The current outbreak began on the 12th of October 2019, with two confirmed cases being reported. One of the first two patients passed away on the 25th of October 2019, whilst the other one survived to date. Of the confirmed cases about 56% were females (Figure 1). Mortality records showed no significant difference between females and males (18 females vs 19 males). The current data suggest that females are slightly more likely to get plague than males, yet both males and females have an equal chance of dying from the plague. Looking at the age distribution (Figure 3), it is evident that people from all age groups are susceptible to plague. However, people from the age groups: 35-40, 45-50 and 50-55 were the least infected. The best way to stop transmission is to treat people who have been exposed to infected people to prevent infection and to isolate people who are confirmed to be infected for the duration of the infection. 
+The outbreak is currently slowing down since the updated date shows only one case occurred after 10 days, compared to the previous rate of infection (Figure 1). The current outbreak began with two confirmed cases, One of the first two patients passed away 13 days later, whilst the other one survived to date. The current data suggest that females are slightly more likely to get plague than males, yet both males and females have an equal chance of dying from the plague. Looking at the age distribution (Figure 2), it is evident that people from all age groups are susceptible to plague. However, people from the age groups: 35-40, 45-50 and 50-55 were the least infected. The best way to stop transmission is to treat people who have been exposed to infected people to prevent infection and to isolate people who are confirmed to be infected for the duration of the infection. There was an average reporting delay of 7.4 days.
 
-
-# A strategic approach to prevention, detection and control
-
-**Case definition**
-
-Plague diagnosis is confirmed by laboratory diagnosis which can either be by the isolation of Y. pestis from a clinical specimen or a significant (fourfold or more) change in paired serum antibody titer to *Y. pestis* F1 antigen (4).
-
-**Symptoms**
-
-Symptoms of pneumonic plague include fever, headache, development of pneumonia within a short space of time, followed by shortness of breath, chest pain and cough. The patient may progress to respiratory failure and shock if not treated within 2 to 4 days. If not treated, pneumonic plague can be fatal (5). 
-
-**Prevention**
-
-Currently, there is no vaccine for plague. People who came into direct contact with infectious people must take antibiotics for seven days to decrease the chances of being infected (5). Patients who suspect they might be infected with plague must wear surgical masks to prevent spreading the diseases. Plague is usually caused by rodents and fleas, as part of prevention, people are encouraged to reduce rodent habitats around them and to keep fleas off their pets (6). 
-
-# Situation update
-
-We report on the progression of the recent pneumonic plague outbreak in a community in northeast India which commenced on 12 October 2019. The community has a population of 302 people. Between the 12th of October 2019 and 29th of November 2019, there were 189 reported cases, 160 confirmed cases and 29 probable cases. The outbreak has caused 24 deaths to date.
 
 ```{r, message = FALSE, cache = TRUE, echo = FALSE, results='asis'}
 # plague2_data <- read_csv('Data/plague_2.csv') 
@@ -85,10 +68,7 @@ plague2_data_update <- plague2_data_update%>%
 # summary(plague2_data)
 ```
 
-The first case of the plague outbreak of India was detected on 11-Oct-19 and reached it's peak on 6-Nov-19 (figure 1). Majority `r round(table(plague2_data_update$status)[[1]]/length(plague2_data_update$caseID)*100, 2)`% out of `r length(plague2_data_update$caseID)` cases were Lab confirmed.
 
-
-Of the `r length(plague2_data_update$caseID)` cases, majority `r round(table(plague2_data_update$sex)[[1]]/length(plague2_data_update$caseID)*100, 2)`% were female. The first 3 cases of the plague occured in females (Figure 1) and it was five days later, on the 17-October 2019, when the first case was recored in the males.
 
 ```{r fig1, cache = F, echo=FALSE, fig.height = 4, fig.align = 'left', results='asis', message=FALSE, warning=FALSE, fig.cap = '**Figure 1:Gender distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct - 09 Dec 2019**'}
 ##gender distribution
@@ -107,21 +87,21 @@ plague2_data_update <- plague2_data_update%>%
 ```
 
 There were no gender differences in mortality, i.e. `r table(plague2_data_update$sex,plague2_data_update$death_stri)[3]` in females vs `r table(plague2_data_update$sex,plague2_data_update$death_stri)[4]` in males (p.value=`r (prop.test(x=c(18,19),n=c(89,64), alternative = "two.sided", correct = TRUE))$p.value`). The highest number of deaths, i.e. 4 deaths, in a single day, reported occured on `r (plague2_data_update$deathDate[which(!is.na(plague2_data_update$deathDate),)])[which.max(tabulate(match(plague2_data_update$deathDate, plague2_data_update$deathDate[which(!is.na(plague2_data_update$deathDate),)])))]` (figure 2).
-```{r fig2, cache = F, echo=FALSE, fig.height = 4, fig.align = 'left', results='asis', warning=FALSE, fig.cap = '**Figure 2: Mortality due to pneumonic plague outbreak in Northeast India 12 Oct - 09 Dec 2019**'}
+```{r fig5, cache = F, echo=FALSE, fig.height = 4, fig.align = 'left', results='asis', warning=FALSE, fig.cap = '**Figure 2: Mortality due to pneumonic plague outbreak in Northeast India 12 Oct - 09 Dec 2019**'}
 
-inc_object <- incidence(plague2_data_update$deathDate, groups = plague2_data_update$death_stri)
-my_theme <- theme_bw(base_size = 12) +
- theme(panel.grid.minor = element_blank()) +
- theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, color = "black"))
-plot(inc_object, border = "white") +
- my_theme + ylab('Daily number of deaths')+
- theme(legend.position = 'none')#+ scale_x_date(limits = c(min(plague2_data_update$onsetDate), max(plague2_data_update$onsetDate)))
+# inc_object <- incidence(plague2_data_update$deathDate, groups = plague2_data_update$death_stri)
+# my_theme <- theme_bw(base_size = 12) +
+#  theme(panel.grid.minor = element_blank()) +
+#  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, color = "black"))
+# plot(inc_object, border = "white") +
+#  my_theme + ylab('Daily number of deaths')+
+#  theme(legend.position = 'none')#+ scale_x_date(limits = c(min(plague2_data_update$onsetDate), max(plague2_data_update$onsetDate)))
 
 ```
 
-Fourty-three cases occured in 20-25 year olds, which was the age-group with the highest number of infections, followed by (40-45] and (25-30] year-olds (figure 3). Cases in the (20-25] age range had the highest mortality at 34%. Those who were (0-20] year olds--consisting of only 4 and 6 year olds-- had a higher mortality rate 26.7% compared to (30-35] year olds 20%. there were fewer deaths, only one person, in the (55-60] out ot 9 reported cases and no deaths reported deaths among (50-55] and (35-40]age groups.
+Fourty-three cases occured in 20-25 year olds, which was the age-group with the highest number of infections, followed by (40-45] and (25-30] year-olds (figure 2). Cases in the (20-25] age range had the highest mortality at 34%. Those who were (0-20] year olds--consisting of only 4 and 6 year olds-- had a higher mortality rate 26.7% compared to (30-35] year olds 20%. there were fewer deaths, only one person, in the (55-60] out ot 9 reported cases and no deaths reported deaths among (50-55] and (35-40] age groups.
 
-```{r fig3, cache = F, echo=FALSE, fig.height = 4, fig.align = 'left', results='asis', warning = FALSE, fig.cap = '**Figure 3: Age distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct - 09 Dec 2019**'}
+```{r fig2, cache = F, echo=FALSE, fig.height = 4, fig.align = 'left', results='asis', warning = FALSE, fig.cap = '**Figure 2: Age distribution of the pneumonic plague outbreak in\n Northeast India 12 Oct - 09 Dec 2019**'}
 ##drawing age distribution
 age_freq <- table(plague2_data_update$age_cat)
 par(mar=c(6, 4, 4, 2))
@@ -135,8 +115,27 @@ barplot(age_freq,
         las = 2, horiz = T)
 axis(1, at = seq(0,45,5))
 
+plague2_data_update <- plague2_data_update%>%
+  mutate(report_delays = as.numeric(reportDate - onsetDate))
+
 ```
 
+
+# A strategic approach to prevention, detection and control
+
+**Case definition**
+
+Plague is a zoonotic disease caused by a bacteria found in rodents (1). Individuals who are infected with plague usually manifest symptoms after an incubation period of three to seven days. There are three main forms of the plague disease: bubonic, septicaemic and pneumonic (2). In this location, the plague is of the pneumonic form.
+
+Pneumonic plague diagnosis is confirmed by laboratory diagnosis which can either be by the isolation of Y. pestis from a clinical specimen or a significant (fourfold or more) change in paired serum antibody titer to *Y. pestis* F1 antigen (4).
+
+**Symptoms**
+
+Symptoms of pneumonic plague include fever, headache, development of pneumonia within a short space of time, followed by shortness of breath, chest pain and cough. The patient may progress to respiratory failure and shock if not treated within 2 to 4 days. If not treated, pneumonic plague can be fatal (5). 
+
+**Prevention**
+
+Currently, there is no vaccine for plague. People who came into direct contact with infectious people must take antibiotics for seven days to decrease the chances of being infected (5). Patients who suspect they might be infected with plague must wear surgical masks to prevent spreading the diseases. Plague is usually caused by rodents and fleas, as part of prevention, people are encouraged to reduce rodent habitats around them and to keep fleas off their pets (6).
 
 \newpage
 # References
